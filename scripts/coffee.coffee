@@ -194,7 +194,7 @@ ensureImageExtension = (url) ->
     "#{url}#.png"
 
 poetMe = (msg, query, cb) ->
-  msg.http('http://pail.unist.ac.kr/carpedm20/poet/get/'+encodeURIComponent(query))
+  msg.http('http://pail.unist.ac.kr/carpedm20/poet/get/'+encodeURIComponent(query.replace("/","")))
     .get() (err, res, body) ->
       cb body
 
