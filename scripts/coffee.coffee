@@ -13,6 +13,10 @@ module.exports = (robot) ->
   robot.hear /(헥사)/i, (msg) ->
     msg.send "다다히로찡!"
 
+  robot.hear /(시인|시|뉴럴) (.*)/i, (msg) ->
+    poetMe msg, msg.match[2], (poet) ->
+      msg.send poet
+
   robot.hear /(히익|힠|힉|히익|히이익|히이이익)/i, (msg) ->
     msg.send msg.match[1]+"거리지마"
 
@@ -188,6 +192,11 @@ ensureImageExtension = (url) ->
     url
   else
     "#{url}#.png"
+
+poetMe = (msg, query, cb) ->
+  msg.http('http://pail.unist.ac.kr/carpedm20/poet/get/'+query)
+    .get() (err, res, body) ->
+      cb body
 
 googleMe = (msg, query, cb) ->
   msg.http('http://www.google.com/search')
