@@ -10,8 +10,8 @@
 
 module.exports = (robot) ->
 
-  robot.hear /(헥사|HeXA|hexa)/i, (msg) ->
-    msg.send "HeXA is the BEST"
+  robot.hear /(헥사)/i, (msg) ->
+    msg.send "다다히로찡!"
 
   robot.hear /(히익|힠|힉|히익|히이익|히이이익)/i, (msg) ->
     msg.send msg.match[1]+"거리지마"
@@ -188,3 +188,9 @@ ensureImageExtension = (url) ->
     url
   else
     "#{url}#.png"
+
+googleMe = (msg, query, cb) ->
+  msg.http('http://www.google.com/search')
+    .query(q: query)
+    .get() (err, res, body) ->
+      cb body.match(/class="r"><a href="\/url\?q=([^"]*)(&amp;sa.*)">/)?[1] || "Sorry, Google had zero results for '#{query}'"
