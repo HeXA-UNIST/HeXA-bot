@@ -10,7 +10,7 @@
 
 module.exports = (robot) ->
 
-  robot.hear /헥사/i, (msg) ->
+  robot.hear /(헥사|HeXA|hexa)/i, (msg) ->
     msg.send "HeXA is the BEST"
 
   robot.hear /(히익|힠|힉|히익|히이익|히이이익)/i, (msg) ->
